@@ -1,14 +1,10 @@
-// L4YSAK3te7c3EKwYDA7qIpRH4yNQ6KI9paQ3xKJ6JUa8PwZZ60PQjxtS
-// f4e9d4ea88a919a40683d7ff340f995d
-
-
 import React, { useState, useEffect, useRef } from "react"; 
 // useState is used to create and manage dynamic values (like city name, weather info, image URLs)
 // useEffect is used to run code when the component loads or when specific values change
 // useRef is used to store a value (like a timer) that won’t cause re-renders when it changes
 
 import "./App.css"; // Importing CSS styles
-import defaultBackground from "./imag.1.jpg"; // A default image stored in the src folder to show initially
+import defaultBackground from "./image3.jpg"; // A default image stored in the src folder to show initially
 
 // This function defines your main React component: "App"
 function App() {
@@ -30,11 +26,10 @@ function App() {
   // A reference to the image slideshow timer (used to clear it later)
   const intervalRef = useRef(null);
 
-  // API keys (replace with your real keys)
-  const WEATHER_API_KEY = "f4e9d4ea88a919a40683d7ff340f995d"; // Your OpenWeatherMap API key
-  const PEXELS_ACCESS_KEY = "L4YSAK3te7c3EKwYDA7qIpRH4yNQ6KI9paQ3xKJ6JUa8PwZZ60PQjxtS"; // Your Pexels API key
+  const WEATHER_API_KEY = "f4e9d4ea88a919a40683d7ff340f995d"; //  OpenWeatherMap 
+  const PEXELS_ACCESS_KEY = "L4YSAK3te7c3EKwYDA7qIpRH4yNQ6KI9paQ3xKJ6JUa8PwZZ60PQjxtS"; // Pexels 
 
-  // 🔍 Fetch city images from the Pexels API
+  //  Fetch city images from the Pexels API
   const getCityImages = async (cityName) => {
     try {
       const res = await fetch(
@@ -60,7 +55,7 @@ function App() {
     }
   };
 
-  // 🌤️ Fetch weather information for the city from OpenWeatherMap
+  //  Fetch weather information for the city from OpenWeatherMap
   const getWeather = async () => {
     if (!city.trim()) {
       setError("Please enter a city name.");
@@ -95,7 +90,7 @@ function App() {
     }
   };
 
-  // 🔄 Cycle through images every 5 seconds
+  //  Cycle through images every 5 seconds
   useEffect(() => {
     if (imageUrls.length > 1) {
       intervalRef.current = setInterval(() => {
@@ -108,7 +103,7 @@ function App() {
     }
   }, [imageUrls]);
 
-  // ⏱️ Format timezone offset to UTC format (e.g. UTC +5:30)
+  //  Format timezone offset to UTC format (e.g. UTC +5:30)
   const formatTimezone = (offset) => {
     const hours = Math.floor(Math.abs(offset) / 3600);
     const minutes = (Math.abs(offset) % 3600) / 60;
@@ -116,23 +111,30 @@ function App() {
     return `UTC ${sign}${hours}:${minutes === 0 ? "00" : minutes}`;
   };
 
-  // 🎨 Determine which background image to show (either slideshow or default)
+  //  Determine which background image to show (either slideshow or default)
   const backgroundImageUrl =
     imageUrls.length > 0 ? imageUrls[currentIndex] : defaultBackground;
 
-  // 📦 JSX Return: how the UI looks
+  //  JSX Return: how the UI looks
   return (
-    <div
-      className="app-container"
-      style={{
-        backgroundImage: `url(${backgroundImageUrl})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100vh", // ensures full screen
-        width: "100%",
-      }}
-    >
+    // <div
+    //   className="app-container"
+    //   style={{
+    //     backgroundImage: `url(${backgroundImageUrl})`,
+    //     backgroundSize: "cover",
+    //     backgroundPosition: "center",
+    //     backgroundRepeat: "no-repeat",
+    //     minHeight: "100vh", // ensures full screen
+    //     width: "100%",
+    //   }}
+    // >
+    <div className="app-container">
+  <img
+    src={backgroundImageUrl}
+    alt="City background"
+    className="background-image"
+  />
+
       <div
         className={`overlay ${
           weather ? "overlay-after-search" : "overlay-before-search"
